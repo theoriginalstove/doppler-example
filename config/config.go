@@ -7,19 +7,22 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"sync"
 )
 
 const dopplerBaseURI = "https://api.doppler.com/v3/configs/"
 
 var (
 	dopplerToken = os.Getenv("DOP_TOKEN")
-	environment  = os.Getenv("RUNMODE")
+	environment  = os.Getenv("RUN_MODE")
+	envName      = os.Getenv("DOPPLER_ENV_NAME")
 )
 
 type Config struct {
 	Project   string
 	Secrets   map[string]string
 	serverURI string
+	l         sync.RWMutex
 }
 
 func Configure(prefix string) *Config {
@@ -44,6 +47,8 @@ type dopplerSecretsRes struct {
 }
 
 func (c *Config) getDopplerSecrets() error {
+	c.l.Lock()
+	defer c.l.Unlock()
 	secrets := make(map[string]string)
 	url := fmt.Sprintf("%s?project=%v&config=%v&include_dynamic_secrets=true&dynamic_secrets_ttl_sec=1800",
 		c.serverURI,

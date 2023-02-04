@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	"gitlab.com/avocagrow/doppler-example/app"
+	"gitlab.com/steven.t/doppler-example/app"
 )
 
 func main() {

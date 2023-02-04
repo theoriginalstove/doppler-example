@@ -6,7 +6,7 @@ import (
 	"log"
 
 	"github.com/jackc/pgx/v5/pgxpool"
-	"gitlab.com/avocagrow/doppler-example/config"
+	"gitlab.com/steven.t/doppler-example/config"
 )
 
 var (

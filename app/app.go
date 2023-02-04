@@ -6,8 +6,8 @@ import (
 
 	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/chi/v5"
-	"gitlab.com/avocagrow/doppler-example/config"
-	"gitlab.com/avocagrow/doppler-example/db"
+	"gitlab.com/steven.t/doppler-example/config"
+	"gitlab.com/steven.t/doppler-example/db"
 )
 
 type App struct {

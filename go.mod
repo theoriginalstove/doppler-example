@@ -1,4 +1,4 @@
-module gitlab.com/avocagrow/doppler-example
+module gitlab.com/steven.t/doppler-example
 
 go 1.19
 
