@@ -3,71 +3,48 @@ package db
 import (
 	"context"
 	"fmt"
+	"math/rand"
+	"strings"
+
+	"github.com/google/uuid"
 )
 
 const (
-	accountsTableName         = "accounts"
-	accountsEmailsTableName   = "accounts_emails"
-	accountPassResetTableName = "accounts_password_reset"
-	plantsTableName           = "plants"
+	plantsTableName = "plants"
 )
 
 var allTableNames = []string{
-	accountsTableName,
-	accountPassResetTableName,
 	plantsTableName,
 }
 
 func (i *Instance) ensureSchemas(ctx context.Context, suffix string) error {
-	// account table name
-	at := fmt.Sprintf(`
-CREATE TABLE IF NOT EXISTS %s (
-    id UUID PRIMARY KEY NOT NULL,
-    name STRING,
-    username VARCHAR(64) UNIQUE,
-    pw BLOB,
-    handle STRING UNIQUE,
-    phone STRING UNIQUE,
-    is_verified BOOL DEFAULT false,
-    emails BLOB
-)
-    `, accountsTableName)
-
-	_, err := i.db.Exec(ctx, at)
-	if err != nil {
-		return err
-	}
-
-	// accounts_emails table
-	aet := fmt.Sprintf(`
-CREATE TABLE IF NOT EXISTS %s (
-    account_id UUID NOT NULL REFERENCES accounts (id) ON DELETE CASCADE,
-    email STRING NOT NULL UNIQUE,
-    is_primary BOOL DEFAULT FALSE,
-    is_verified BOOL DEFAULT FALSE,
-    verification_token STRING,
-    verification_expires TIMESTAMP
-)
-    `, accountsEmailsTableName)
-	_, err = i.db.Exec(ctx, aet)
-	if err != nil {
-		return err
-	}
-
 	// plants table
-	pt := fmt.Sprintf(` CREATE TABLE IF NOT EXISTS %s (
+	pt := fmt.Sprintf(`CREATE TABLE IF NOT EXISTS %s (
 	    id STRING NOT NULL PRIMARY KEY,
-	    common_name STRING NOT NULL,
-	    scientific_name STRING NOT NULL,
-	    varients JSONB
+	    name STRING NOT NULL,
+	    botanical_name STRING NOT NULL,
+	    status STRING,
+        water_pref STRING,
+        light_pref STRING,
+        humidity_pref STRING
 	)
 	    `, plantsTableName)
 
-	_, err = i.db.Exec(ctx, pt)
+	_, err := i.db.Exec(ctx, pt)
 	if err != nil {
 		return err
 	}
-
+	plants := generatePlants()
+	pi := fmt.Sprintf(`
+        INSERT INTO %s (id, name, botanical_name, status, water_pref, light_pref, humidity_pref)
+        VALUES ($1,$2,$3,$4,$5,$6,$7)
+    `, plantsTableName)
+	for j := 0; j < len(plants); j++ {
+		_, err := i.db.Exec(ctx, pi, plants[j].ID, plants[j].Name, plants[j].BotanicalName, plants[j].Status, plants[j].WaterPref, plants[j].LightPref, plants[j].HumidityPref)
+		if err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -82,4 +59,43 @@ func (i *Instance) cleanupSchemas() error {
 
 	}
 	return nil
+}
+
+// max and min number or records
+var (
+	min        = 5
+	max        = 30
+	adjectives = []string{
+		"pretty", "large", "big", "small", "tall", "short", "long",
+		"leafy", "adapted", "weary", "stronger", "adorable", "inexpensive",
+		"adaptable", "expensive", "appreciative", "cheap", "expensive",
+		"adventurous", "crude", "fancy", "cruel", "fancy", "omniscient",
+	}
+	plants = []string{
+		"monstera", "philodendron", "pothos", "rex begonia",
+		"fig", "mango", "apple", "jalepeno", "habenero",
+		"coffee", "snake plant", "spider plant", "curry leaf",
+		"achacha", "orange", "lime", "longan", "lychee",
+	}
+	pref = []string{"low", "medium", "high"}
+)
+
+func generatePlants() []Plant {
+	pp := []Plant{}
+	num := rand.Intn(max-min) + min
+	for i := 0; i < num; i++ {
+		adj := adjectives[rand.Intn(len(adjectives))]
+		plant := plants[rand.Intn(len(plants))]
+
+		pp = append(pp, Plant{
+			ID:            uuid.New(),
+			Name:          strings.Join([]string{adj, plant}, " "),
+			BotanicalName: plant,
+			Status:        "Fertilized",
+			WaterPref:     pref[rand.Intn(len(pref))],
+			LightPref:     pref[rand.Intn(len(pref))],
+			HumidityPref:  pref[rand.Intn(len(pref))],
+		})
+	}
+	return pp
 }

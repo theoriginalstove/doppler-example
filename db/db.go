@@ -17,23 +17,46 @@ var (
 )
 
 type Instance struct {
-	db *pgxpool.Pool
+	connStr      string
+	ensureSchema bool
+	suffix       string
+	db           *pgxpool.Pool
 }
 
-func Configure(setupSchema bool, suffix string, conf *config.Config) *Instance {
-	i := Instance{}
+func Configure(ensureSchema bool, suffix string, conf *config.Config) *Instance {
+	i := Instance{
+		ensureSchema: ensureSchema,
+		suffix:       suffix,
+	}
 	ctx := context.Background()
-	connString := conf.Secrets["ROACH_CONN"]
-	conn, err := pgxpool.New(ctx, connString)
+	i.connStr = conf.Secrets["ROACH_CONN"]
+	conn, err := pgxpool.New(ctx, i.connStr)
 	if err != nil {
 		log.Fatal("unable to establist connection to cockroachdb")
 	}
 	i.db = conn
 
-	if setupSchema {
-		if err := i.ensureSchemas(ctx, suffix); err != nil {
-			log.Fatal("unable to run the schema check")
+	if ensureSchema {
+		if err := i.ensureSchemas(ctx, i.suffix); err != nil {
+			log.Fatal("unable to run the schema check: %w", err)
 		}
 	}
 	return &i
+}
+
+func (i *Instance) SetNewConnection(ctx context.Context, connStr string) error {
+	i.db.Close()
+	i.connStr = connStr
+	conn, err := pgxpool.New(ctx, i.connStr)
+	if err != nil {
+		return err
+	}
+	i.db = conn
+
+	if i.ensureSchema {
+		if err := i.ensureSchemas(ctx, i.suffix); err != nil {
+			return err
+		}
+	}
+	return nil
 }

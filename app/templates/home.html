@@ -1,4 +1,4 @@
-{{define "title"}}Home Page{{end}}
+{{define "title"}}Pied Piper | Plant Tracker{{end}}
 {{define "body" }}
 <div class="bg-neutral-200 dark:bg-neutral-900 py-8">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 xl:flex xl:items-center xl:justify-between">
@@ -25,18 +25,11 @@
                 Ikea Greenhouse Cabinet - Living Room
             </h2>
         </div>
-        <div class="mt-5 flex items-center xl:mt-0 xl:ml-4 xl:-mr-8 px-8 py-3 rounded-lg drop-shadow">
+        <div class="mt-5 flex items-center xl:mt-0 xl:ml-4 xl:-mr-8 px-8 py-3 rounded-lg">
             <div class="mx-auto">
                 <h3 class="mt-t text-xl font-bold leader-7 text-neutral-900 dark:text-neutral-400 sm:truncate sm:text-xl sm:tracking-tight">
-                    Connected to: <span id="output" class="dark:text-lime-400 text-lime-700 leading-2 ">{{.}}</span>
+                    Connected to: <span id="output" class="dark:text-lime-400 text-lime-800 leading-2 ">{{.}}</span>
                 </h3>
-            </div>
-            <div class="mx-5 px-2">
-                <span class="hidden sm:block">
-                    <button id="open" type="button" class="inline-flex items-center rounded-full px-4 py-2 bg-emerald-400 dark:bg-emerald-600">
-                        Open connection
-                    </button>
-                </span>
             </div>
         </div>
     </div>
@@ -126,14 +119,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="mx-auto max-w-7xl overflow-hidden bg-neutral-200 dark:bg-neutral-700 shadow rounded-md py-2 mt-10 px-4 py-10 flex justify-items-between items-center">
-        <button id="send" type="button" class="inline-flex items-center rounded-full px-4 py-2 bg-sky-800 text-sky-100 dark:bg-sky-300 dark:text-sky-900">
-            Send
-        </button>
-        <button id="close" type="button" class="inline-flex items-center rounded-full px-4 py-2 bg-rose-800 text-rose-100 dark:bg-rose-300 dark:text-rose-900">
-            Close
-        </button>
     </div>
 </main>
 <script>

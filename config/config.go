@@ -13,9 +13,9 @@ import (
 const dopplerBaseURI = "https://api.doppler.com/v3/configs/config/secrets"
 
 var (
-	dopplerToken = os.Getenv("DOP_TOKEN")
+	dopplerToken = os.Getenv("DOPPLER_TOKEN")
 	environment  = os.Getenv("RUN_MODE")
-	envName      = os.Getenv("DOPPLER_ENV_NAME")
+	envName      = os.Getenv("DOPPLER_ENV")
 )
 
 type Config struct {
