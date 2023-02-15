@@ -1,6 +1,7 @@
 package app
 
 import (
+	"html/template"
 	"log"
 	"net/http"
 
@@ -24,9 +25,7 @@ func Configure(prefix string) *App {
 	r.Use(middleware.RealIP)
 	r.Use(middleware.Logger)
 	r.Use(middleware.Recoverer)
-	r.Get("/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("at index home page"))
-	}))
+	r.Get("/", home)
 
 	r.Post("/_config", reloadConfig)
 	app.Router = r
@@ -39,5 +38,19 @@ func reloadConfig(w http.ResponseWriter, r *http.Request) {
 	_, err := w.Write([]byte("ok"))
 	if err != nil {
 		log.Println("err writing to http response")
+	}
+}
+
+func home(w http.ResponseWriter, r *http.Request) {
+	t, err := template.ParseFiles(
+		"app/templates/base.html",
+		"app/templates/home.html",
+	)
+	if err != nil {
+		log.Println("ERROR: unable to parse home template")
+	}
+	err = t.Execute(w, nil)
+	if err != nil {
+		log.Printf("ERROR: unable to execute the template: %v\n\n", err)
 	}
 }

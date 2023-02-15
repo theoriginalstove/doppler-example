@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ template "title" .}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/704abf427b.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) 
+            && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        // whenever the user explicitly chooses light mode
+        localStorage.theme = 'light'
+
+        // whenever the user chooses dark mode
+        localStorage.theme = 'dark'
+
+        // OS preference
+        localStorage.removeItem('theme')
+    </script>
+</head>
+<body class="h-full bg-neutral-200  dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200">
+    <div class="min-h-full">
+        <nav class="bg-neutral-100 dark:bg-neutral-900 ">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 border-b border-neutral-400 dark:border-neutral-600">
+                <div class="relative flex h-16 items-center justify-between">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <h2 class="text-left text-3xl text-lime-900">Plant Tracker</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div>
+    {{ template "body" . }}
+    </div>
+</body>

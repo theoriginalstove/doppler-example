@@ -1,0 +1,117 @@
+{{define "title"}}Home Page{{end}}
+{{define "body" }}
+<div class="bg-neutral-200 dark:bg-neutral-900 py-8">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 xl:flex xl:items-center xl:justify-between">
+        <div class="min-w-0">
+            <nav class="flex" aria-label="Breadcrumb">
+                <ol role="list" class="flex items-center space-x-4">
+                    <li>
+                        <div>
+                            <a href="#" class="text-sm font-medium text-neutral-500 dark:hover:text-lime-200">Plants</a>
+                        </div>
+                    </li>
+                    <li>
+                      <div class="flex items-center">
+                        <!-- Heroicon name: mini/chevron-right -->
+                        <svg class="h-5 w-5 flex-shrink-0 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
+                        </svg>
+                        <a href="#" class="ml-4 text-sm font-medium text-gray-500 hover:text-lime-700 dark:hover:text-lime-200">House Plants</a>
+                      </div>
+                    </li>
+                </ol>
+            </nav>
+            <h2 class="mt-t text-2xl font-bold leader-7 text-neutral-900 dark:text-neutral-400 sm:truncate sm:text-3xl sm:tracking-tight">
+                Ikea Greenhouse Cabinet - Living Room
+            </h2>
+        </div>
+    </div>
+</div>
+<main class="pt-8 pb-16 bg-neutral-100 dark:bg-neutral-900 min-h-screen">
+    <div class="mx-auto max-w-7xl overflow-hidden bg-neutral-200 dark:bg-neutral-700 shadow rounded-md py-2">
+        <div class="px-6 lg:px-8">
+            <div class="sm:flex sm:items-center">
+                <div class="sm:flex-auto">
+                    <h2 class="text-xl font-semibold text-neutral-900 dark:text-neutral-200">
+                        Plants
+                    </h2>
+                    <p>
+                        A list of all your green children
+                    </p>
+                </div>
+                <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
+                    <button type="button" class="block rounded-lg bg-lime-700 py-1.5 px-3 text-center text-sm font-semibold leading-6 text-lime-50 shadow-sm hover:bg-lime-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-700">
+                        Add plant
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="mt-8 flow-root">
+            <div class="-my-2 -mx-6 overflow-x-auto lg:-mx-2">
+                <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+                    <table class="min-w-full divide-y divide-neutral-300 dark:divide-neutral-700">
+                        <thead class="bg-neutral-50 dark:bg-neutral-800">
+                            <tr>
+                                <th scope="col" class="py-3.5 pl-6 pr-3 text-left text-sm font-semibold text-neutral-900 dark:text-neutral-300">
+                                    Name
+                                </th>
+                                <th scope="col" class="py-3.5 pl-6 pr-3 text-left text-sm font-semibold text-neutral-900 dark:text-neutral-300">
+                                    Botanical Name
+                                </th>
+                                <th scope="col" class="py-3.5 pl-6 pr-3 text-left text-sm font-semibold text-neutral-900 dark:text-neutral-300">
+                                    Last Watered
+                                </th>
+                                <th scope="col" class="py-3.5 pl-6 pr-3 text-left text-sm font-semibold text-neutral-900 dark:text-neutral-300">
+                                    Status
+                                </th>
+                                <th scope="col" class="py-3.5 pl-6 pr-3 text-left text-sm font-semibold text-neutral-900 dark:text-neutral-300">
+                                    Water Preference
+                                </th>
+                                <th scope="col" class="py-3.5 pl-6 pr-3 text-left text-sm font-semibold text-neutral-900 dark:text-neutral-300">
+                                    Light
+                                </th>
+                                <th scope="col" class="py-3.5 pl-6 pr-3 text-left text-sm font-semibold text-neutral-900 dark:text-neutral-300">
+                                    Humidity
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="whitespace-nowrap py-4 pl-6 pr-3 text-sm font-medium text-neutral-900 dark:text-neutral-300">
+                                    Big Leafy Boi
+                                </td>
+                                <td class="whitespace-nowrap py-4 pl-6 pr-3 text-sm font-medium text-neutral-900 dark:text-neutral-300">
+                                    Monstera Deliciosa
+                                </td>
+                                <td class="whitespace-nowrap py-4 pl-6 pr-3 text-sm font-medium text-neutral-900 dark:text-neutral-300">
+                                    Monday, Feb 6 2023
+                                </td>
+                                <td class="whitespace-nowrap py-4 pl-6 pr-3 text-sm font-medium text-neutral-900 dark:text-neutral-300">
+                                    <span class="bg-lime-300 text-lime-900 rounded-full px-4 py-1 w-1/2">
+                                        Fertilized
+                                    </span>
+                                </td>
+                                <td class="whitespace-nowrap py-4 pl-6 pr-3 text-sm font-medium text-neutral-900 dark:text-neutral-300">
+                                    <span class="block bg-sky-300 text-sky-900 rounded-full px-3 py-1 w-2/3 text-center">
+                                        Medium
+                                    </span>
+                                </td>
+                                <td class="whitespace-nowrap py-4 pl-6 pr-3 text-sm font-medium text-neutral-900 dark:text-neutral-300">
+                                    <span class="bg-yellow-300 text-yellow-900 rounded-full px-4 py-1 w-2/3">
+                                        High
+                                    </span>
+                                </td>
+                                <td class="whitespace-nowrap py-4 pl-6 pr-3 text-sm font-medium text-neutral-900 dark:text-neutral-300">
+                                    <span class="bg-teal-300 text-teal-900 rounded-full px-4 py-1 w-2/3">
+                                        High
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{{end}}
