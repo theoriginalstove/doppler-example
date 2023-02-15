@@ -11,6 +11,6 @@ func main() {
 	if addr == "" {
 		addr = ":5005"
 	}
-	a := app.Configure("", app.WithAddr(addr))
+	a := app.Configure("better_secrets", app.WithAddr(addr))
 	a.Server.ListenAndServe()
 }

@@ -10,7 +10,7 @@ import (
 	"sync"
 )
 
-const dopplerBaseURI = "https://api.doppler.com/v3/configs/"
+const dopplerBaseURI = "https://api.doppler.com/v3/configs/config/secrets"
 
 var (
 	dopplerToken = os.Getenv("DOP_TOKEN")
@@ -26,6 +26,9 @@ type Config struct {
 }
 
 func Configure(prefix string) *Config {
+	if dopplerToken == "" {
+		log.Println("doppler token is not set")
+	}
 	c := Config{
 		Project:   prefix,
 		serverURI: dopplerBaseURI,
@@ -47,13 +50,9 @@ type dopplerSecretsRes struct {
 }
 
 func (c *Config) GetDopplerSecrets() error {
-	c.l.Lock()
-	defer c.l.Unlock()
 	secrets := make(map[string]string)
-	url := fmt.Sprintf("%s?project=%v&config=%v&include_dynamic_secrets=true&dynamic_secrets_ttl_sec=1800",
+	url := fmt.Sprintf("%s?project=better_secrets&config=dev&include_dynamic_secrets=false&include_managed_secrets=true",
 		c.serverURI,
-		c.Project,
-		environment,
 	)
 
 	client := http.DefaultClient
@@ -62,9 +61,9 @@ func (c *Config) GetDopplerSecrets() error {
 	if err != nil {
 		return err
 	}
-	req.SetBasicAuth(dopplerToken, "")
 	req.Header.Add("accept", "application/json")
 	req.Header.Add("accepts", "application/json")
+	req.Header.Add("Authorization", "Bearer "+dopplerToken)
 
 	res, err := client.Do(req)
 	if err != nil {

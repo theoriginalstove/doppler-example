@@ -23,7 +23,7 @@ type Instance struct {
 func Configure(setupSchema bool, suffix string, conf *config.Config) *Instance {
 	i := Instance{}
 	ctx := context.Background()
-	connString := conf.Secrets["ROACHCONNSTR"]
+	connString := conf.Secrets["ROACH_CONN"]
 	conn, err := pgxpool.New(ctx, connString)
 	if err != nil {
 		log.Fatal("unable to establist connection to cockroachdb")

@@ -28,7 +28,7 @@
         <div class="mt-5 flex items-center xl:mt-0 xl:ml-4 xl:-mr-8 px-8 py-3 rounded-lg drop-shadow">
             <div class="mx-auto">
                 <h3 class="mt-t text-xl font-bold leader-7 text-neutral-900 dark:text-neutral-400 sm:truncate sm:text-xl sm:tracking-tight">
-                    Connected to: <span id="output" class="dark:text-lime-400 text-lime-700 leading-2 ">plants-1</span>
+                    Connected to: <span id="output" class="dark:text-lime-400 text-lime-700 leading-2 ">{{.}}</span>
                 </h3>
             </div>
             <div class="mx-5 px-2">
@@ -137,56 +137,26 @@
     </div>
 </main>
 <script>
-window.addEventListener('load', function(evt) {
+window.onload= function() {
+    var conn;
     var output = document.getElementById('output');
-    var input = document.getElementById('input');
-
-    var ws;
 
     var print = function(message) {
         output.textContent = message;
     };
 
-    document.getElementById('open').onclick = function(evt) {
-        if (ws) {
-            return false;
-        }
+    if (window["WebSocket"]) {
+        conn = new WebSocket("wss://" + document.location.host + "/ws");
+        conn.onclose = function(evt) {
+            print("Connection closed")
+        };
 
-        ws = new WebSocket("wss://demo.avocagrow.com/ws");
-        ws.onopen = function(evt) {
-            print("OPEN");
+        conn.onmessage = function(evt) {
+            print(evt.data);
         }
-        ws.onclose = function(evt) {
-            print("CLOSE")
-            ws = null;
-        }
-
-        ws.onmessage =function(evt) {
-            print("RESPONSE: " + evt.data);
-        }
-
-        ws.onerror = function(evt) {
-            print("ERROR: " + evt.data);
-        }
-        return false;
-    };
-
-    document.getElementById('send').onclick = function(evt) {
-        if (!ws) {
-            return false;
-        }
-        print("SEND: " + input.value);
-        ws.send(input.value);
-        return false;
-    };
-
-    document.getElementById('close').onclick = function(evt) {
-        if (!ws) {
-            return false;
-        }
-        ws.close();
-        return false;
-    };
-})
+    } else {
+        print("your browser does not support web sockets.")
+    }
+};
 </script>
 {{end}}
