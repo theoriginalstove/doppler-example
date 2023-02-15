@@ -52,7 +52,7 @@ The last comment block of each slide will be treated as slide notes. It will be 
 
 
 - 📝 **Founder** of Avocagrow, a tool for helping with your plants
-- 🧑‍💻 **Senior Software Engineer** @ TSI, Inc.
+- 🧑‍💻 **Senior Software Engineer**
 - 🥑 **Random facts** : 
     - Owner of what some may consider too many plants. 
     - Lover of spicy food - the hotter the better
