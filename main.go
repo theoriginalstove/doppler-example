@@ -1,14 +1,16 @@
 package main
 
 import (
-	"log"
-	"net/http"
+	"os"
 
 	"gitlab.com/steven.t/doppler-example/app"
 )
 
 func main() {
-	app := app.Configure("")
-	log.Printf("listening on port %s", "5005")
-	http.ListenAndServe(":5005", app.Router)
+	addr := os.Getenv("HTTP_ADDR")
+	if addr == "" {
+		addr = ":5005"
+	}
+	a := app.Configure("", app.WithAddr(addr))
+	a.Server.ListenAndServe()
 }

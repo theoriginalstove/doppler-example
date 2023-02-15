@@ -30,7 +30,7 @@ func Configure(prefix string) *Config {
 		Project:   prefix,
 		serverURI: dopplerBaseURI,
 	}
-	err := c.getDopplerSecrets()
+	err := c.GetDopplerSecrets()
 	if err != nil {
 		log.Fatal("unable to retrieve and set secrets from doppler")
 	}
@@ -46,7 +46,7 @@ type dopplerSecretsRes struct {
 	Secrets map[string]dopplerSecretKey `json:"secrets"`
 }
 
-func (c *Config) getDopplerSecrets() error {
+func (c *Config) GetDopplerSecrets() error {
 	c.l.Lock()
 	defer c.l.Unlock()
 	secrets := make(map[string]string)
