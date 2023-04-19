@@ -28,7 +28,6 @@ jobs:
       - uses: pulumi/actions@v3
         with: 
           command: up
-          stack-name: github-preview
         env:
           PULUMI_ACCESS_TOKEN: '${{ secrets.PULUMI_ACCESS_TOKEN }}'
 
