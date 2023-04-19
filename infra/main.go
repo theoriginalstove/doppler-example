@@ -8,9 +8,9 @@ import (
 func main() {
 	Pulumi.Run(func(ctx *pulumi.Context) error {
 		registry, err := container.NewRegistry(ctx, "registry", &container.RegistryArgs{
-            Project: pulumi.String("avocagrow-internal-tools"),
-            Location: pulumi.String("")
-        })
+			Project:  pulumi.String("avocagrow-internal-tools"),
+			Location: pulumi.String("US"),
+		})
 		if err != nil {
 			return err
 		}
