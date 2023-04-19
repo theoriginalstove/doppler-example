@@ -6,8 +6,8 @@ import (
 )
 
 func main() {
-	Pulumi.Run(func(ctx *pulumi.Context) error {
-		registry, err := container.NewRegistry(ctx, "registry", &container.RegistryArgs{
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := container.NewRegistry(ctx, "registry", &container.RegistryArgs{
 			Project:  pulumi.String("avocagrow-internal-tools"),
 			Location: pulumi.String("US"),
 		})
