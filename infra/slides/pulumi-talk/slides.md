@@ -105,7 +105,6 @@ image: https://source.unsplash.com/collection/94734566/1920x1080
     - S3
     - Pulumi Cloud
     - Cloud Storage
-- 
 
 ---
 
@@ -113,5 +112,4 @@ image: https://source.unsplash.com/collection/94734566/1920x1080
 
 - Deploy the Doppler Example App to GCP Cloud Run
 - Define all the resources needed to secure the app
-- Give it an ingress and IP address
 
