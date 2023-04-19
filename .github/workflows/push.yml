@@ -1,0 +1,36 @@
+name: Pulumi
+on: 
+  push:
+    branches:
+      - main
+      - pulumi-example
+jobs: 
+  preview:
+    name: Preview
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-go@v3
+        with:
+          go-version: 'stable'
+      - name: Configure GCP Credentials
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
+
+      - name: 'Setup Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v1'
+
+      - name: 'Use gcloud CLI'
+        run: 'gcloud info'
+
+      - name: 'Change Directory and get dependencies'
+        run: 'cd infra; go mod download'
+      - uses: pulumi/actions@v3
+        with: 
+          command: up
+          stack-name: avocagrow/github-preview
+        env:
+          PULUMI_ACCESS_TOKEN: '${{ secrets.PULUMI_ACCESS_TOKEN }}'
+
+
