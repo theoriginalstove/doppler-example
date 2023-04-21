@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/pulumi/pulumi-gcp/sdk/v5/go/gcp/storage"
 	"github.com/pulumi/pulumi-gcp/sdk/v6/go/gcp/appengine"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
@@ -11,6 +12,13 @@ func main() {
 			Project:    pulumi.String("avocagrow-internal-tools"),
 			LocationId: pulumi.String("us-central"),
 		})
+		if err != nil {
+			return err
+		}
+
+        _, err = storage.NewBucket(ctx, "doppler-example", &storage.BucketArgs{
+            Location: pulumi.String("US"),
+        })
 		if err != nil {
 			return err
 		}
