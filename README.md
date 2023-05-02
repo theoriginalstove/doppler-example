@@ -31,7 +31,7 @@ A Doppler account is needed and a project with the following config values set:
  To run and test webhooks locally, a tool like Ngrok is needed to open a secure tunnel to the outside world without exposing your local machine
 
  ```sh
- doppler run --commend="ngrok http -region=us $HTTP_ADDR"
+ doppler run --command="ngrok http -region=us $HTTP_ADDR"
  ```
 
 Once everything is setup(ngrok and doppler CLI downloaded, logged in and setup):
