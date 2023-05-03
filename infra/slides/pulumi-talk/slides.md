@@ -42,10 +42,8 @@ The last comment block of each slide will be treated as slide notes. It will be 
 
 Steven Turturo
 - **Software Engineer**: @Finxact
-- **Github**: TheOriginalStove
+- **Github**: https://github.com/theoriginalstove
 - **Background**: Worked in healthcare, transportation & logistics, ad-tech startups, and now banking.
-    - Started with VBA for Excel & T-SQL back in 2013, and tried all sorts of programming languages like Ruby, Python, C#/.NET
-    - Learned Go back in 2019, but working professionally with Go since early 2022.
 - **Random Facts**:
     - Recently became addicted to finding OSS projects to contribute to.
     - Owner of a German Shedder(Shepherd)
@@ -105,7 +103,6 @@ image: https://source.unsplash.com/collection/94734566/1920x1080
     - S3
     - Pulumi Cloud
     - Cloud Storage
-- 
 
 ---
 
@@ -113,5 +110,4 @@ image: https://source.unsplash.com/collection/94734566/1920x1080
 
 - Deploy the Doppler Example App to GCP Cloud Run
 - Define all the resources needed to secure the app
-- Give it an ingress and IP address
 
