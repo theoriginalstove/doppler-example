@@ -1,8 +1,9 @@
-name: pull-request-pulumi
+name: branch-push-pulumi
 on: 
-  pull_request:
-    paths:
-      - '*.*'
+  push:
+    branches:
+      - main
+      - pulumi-example
 jobs: 
   preview:
     name: Preview
