@@ -33,6 +33,7 @@ require (
 	github.com/pjbgf/sha1cd v0.3.0 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pkg/term v1.1.0 // indirect
+	github.com/pulumi/pulumi-gcp/sdk/v5 v5.26.0 // indirect
 	github.com/pulumi/pulumi-gcp/sdk/v6 v6.54.0 // indirect
 	github.com/pulumi/pulumi/sdk/v3 v3.64.0 // indirect
 	github.com/rivo/uniseg v0.2.0 // indirect
